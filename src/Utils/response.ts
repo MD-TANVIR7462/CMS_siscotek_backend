@@ -1,0 +1,33 @@
+import { Response } from "express";
+import { statusCodes } from "../Configs/StatusCode";
+
+export const emptyResponse = (res: Response, data: any) => {
+  return res.status(statusCodes.notFound).json({
+    success: false,
+    message: "No data found, Database is Empty.",
+    data,
+  });
+};
+
+export const notUpdated = (res: Response, id: string, data: any) => {
+  res.status(statusCodes.notFound).json({
+    success: false,
+    message: `Not found, make sure the id:${id} is correct. `,
+    data,
+  });
+};
+
+export const alreadyExist = (res: Response, data: any) => {
+  res.status(statusCodes.conflict).json({
+    success: false,
+    message: `You Can't create another document`,
+    data,
+  });
+};
+export const success = (res: Response, data: any, name: string) => {
+  res.status(statusCodes.create).json({
+    success: true,
+    message: `${name} created successfully`,
+    data,
+  });
+};

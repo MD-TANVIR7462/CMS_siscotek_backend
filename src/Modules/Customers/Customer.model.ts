@@ -10,6 +10,7 @@ const customerSchema = new Schema<Tcustomer>(
       trim: true,
       minlength: [2, "Name must be at least 2 characters."],
       maxlength: [60, "Name can't exceed 60 characters."],
+      unique:true,
     },
     address: {
       type: String,

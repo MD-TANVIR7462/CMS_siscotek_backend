@@ -5,7 +5,9 @@ export const customerSchema  = z.object({
     .string()
     .trim()
     .min(2, "Name must be at least 2 characters.")
-    .max(60, "Name can't exceed 60 characters."),
+    .max(60, "Name can't exceed 60 characters.")
+    
+,
     
   address: z
     .string()
@@ -52,7 +54,7 @@ export const customerSchema  = z.object({
   mapUrl: z
     .string()
     .trim()
-    .url("Please provide a valid map URL."),
+    .url("Please provide a valid map URL.").optional(),
     
   email: z
     .array(

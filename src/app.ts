@@ -13,7 +13,7 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
-
+app.use("/api/v1", router);
 app.get("/", async (req: Request, res: Response, next) => {
   try {
     res.send("CMS Siscotek server is running!");
@@ -23,7 +23,7 @@ app.get("/", async (req: Request, res: Response, next) => {
   }
 });
 
-app.get("/api/v1", router);
+
 
 app.use("*", routeError);
 app.use(globalError);
