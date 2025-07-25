@@ -24,10 +24,11 @@ export const alreadyExist = (res: Response, data: any) => {
     data,
   });
 };
-export const success = (res: Response, data: any, name: string) => {
+export const success = (res: Response, data: any, message: string, total?: number) => {
   res.status(statusCodes.create).json({
     success: true,
-    message: `${name} created successfully`,
+    message: `${message} successfully`,
+    ...(total !== undefined && { total }),
     data,
   });
 };
