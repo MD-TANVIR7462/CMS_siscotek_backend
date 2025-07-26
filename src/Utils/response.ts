@@ -32,7 +32,7 @@ export const alreadyExist = (res: Response, data: any) => {
   });
 };
 export const success = (res: Response, data: any, message: string, total?: number) => {
-  res.status(statusCodes.create).json({
+  res.status(statusCodes.ok).json({
     success: true,
     message: `${message} successfully`,
     ...(total !== undefined && { total }),
