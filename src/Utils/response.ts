@@ -17,10 +17,17 @@ export const notUpdated = (res: Response, id: string, data: any) => {
   });
 };
 
+export const notGiven=(res:Response)=>{
+  res.status(statusCodes.serviceUnavaiAble).json({
+    success:false,
+    message:"Missing required fields. Please provide all necessary credentials."
+  })
+}
+
 export const alreadyExist = (res: Response, data: any) => {
   res.status(statusCodes.conflict).json({
     success: false,
-    message: `You Can't create another document`,
+    message: `Document already exists. Duplicate creation is not allowed.`,
     data,
   });
 };
