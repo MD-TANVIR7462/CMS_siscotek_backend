@@ -65,7 +65,6 @@ const deleteCustomer: RequestHandler = async (req, res, next) => {
   try {
     const id = req.params.id;
     const deletedCustomer = await customerServices.deleteCustomer(id);
-    console.log(deletedCustomer)
     if (!deletedCustomer) {
       notUpdated(res, id, null);
       return;

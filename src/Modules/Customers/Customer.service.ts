@@ -15,8 +15,6 @@ const getCustomers = async (query: any) => {
   if (query.isActive !== undefined && query.isActive === "false") {
     queryData.isActive = false;
   }
-
-  console.log(queryData, query);
   return await CustomerModel.find(queryData).select("--v").sort({ createdAt: -1 });
 };
 
