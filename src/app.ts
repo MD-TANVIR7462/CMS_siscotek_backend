@@ -10,9 +10,12 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000","https://cms-siscotek.vercel.app"],
+    credentials: true,
   })
 );
+
+
 app.use("/api/v1", router);
 app.get("/", async (req: Request, res: Response, next) => {
   try {
