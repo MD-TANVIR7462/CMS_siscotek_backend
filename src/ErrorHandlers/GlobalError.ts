@@ -35,7 +35,7 @@ const globalError: globalError = (error, req, res, next) => {
   // Handle Mongoose ValidationError
   if (error.name === "ValidationError") {
     const validationErrors = Object.values(error.errors || {}).map((err: any) => err.message);
-    message = `Validation failed: ${validationErrors.join(", ")}`;
+    message = `${validationErrors.join(", ")}`;
     return res.status(400).json({
       success: false,
       statusCode: 400,
@@ -49,7 +49,7 @@ const globalError: globalError = (error, req, res, next) => {
     const validationErrors = error.issues.map(
       (err: { path: any[]; message: any }) => `${err.path.join(".")}: ${err.message}`
     );
-    message = `Validation failed: ${validationErrors.join(", ")}`;
+    message = `${validationErrors.join(", ")}`;
     return res.status(400).json({
       success: false,
       statusCode: 400,
