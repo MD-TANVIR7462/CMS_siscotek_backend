@@ -65,13 +65,12 @@ export const customerSchema  = z.object({
   websiteLink: z
     .string()
     .trim()
-    .url("Please provide a valid website URL."),
+    .url("Please provide a valid website URL.").optional(),
     
   taxId: z
     .string()
     .trim()
-    .min(1, "Tax ID must be at least 1 character.")
-    .max(30, "Tax ID can't exceed 30 characters."),
+    .max(30, "Tax ID can't exceed 30 characters.").optional(),
     
   other: z
     .string()

@@ -6,17 +6,25 @@ import router from "./Router";
 
 const app = express();
 
-//parsers
+// Parsers
 app.use(express.json());
+
+// CORS setup
 app.use(
   cors({
-    origin: ["http://localhost:3000","https://cms-siscotek.vercel.app"],
+    origin: ["http://localhost:3000", "https://cms-siscotek.vercel.app"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
+// 👇 ADD THIS
+app.options("*", cors()); // Handle preflight requests globally
 
+// Routes
 app.use("/api/v1", router);
+
 app.get("/", async (req: Request, res: Response, next) => {
   try {
     res.send("CMS Siscotek server is running!");
@@ -26,8 +34,8 @@ app.get("/", async (req: Request, res: Response, next) => {
   }
 });
 
-
-
+// Error handlers
 app.use("*", routeError);
 app.use(globalError);
+
 export default app;
