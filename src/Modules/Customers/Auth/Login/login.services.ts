@@ -1,13 +1,12 @@
-
 import { envConfig } from "../../../../Configs/envConfig";
 import { isPasswordChange } from "../../../../Utils";
-
 
 import { RegistrationModel } from "../Registration/auth.model";
 import { TLogin } from "./login.interface";
 import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
-
+import dotenv from "dotenv";
+dotenv.config();
 const loginUuser = async (data: TLogin) => {
   const isUserExist = await RegistrationModel.findOne({ email: data.email });
 
@@ -29,9 +28,11 @@ const loginUuser = async (data: TLogin) => {
     email: isUserExist.email,
     role: isUserExist.role,
   };
-  const jwt_Secret = envConfig.accessSecret;
-  const accessToken = jwt.sign(userData, jwt_Secret as string, { expiresIn: "10d" });
-  const refreshToken = jwt.sign(userData, envConfig.refreSecret as string, { expiresIn: "365d" });
+  const jwt_Secret =process.env.JWT_ACCESS_SECRET;
+  const refreSecret = process.env.JWT_REFRESH_SECRET;
+
+  const accessToken = jwt.sign(userData, jwt_Secret as string, { expiresIn: "3d" });
+  const refreshToken = jwt.sign(userData, refreSecret as string, { expiresIn: "365d" });
   const result = {
     accessToken,
     refreshToken,
